@@ -1,6 +1,6 @@
 library(stockPortfolio)
 library(quadprog)
-library(ggplot)
+library(ggplot2)
 
 eff.frontier <- function (returns, short="no", max.allocation=NULL, risk.premium.up=.5, risk.increment=.005){
 # return argument should be a m x n matrix with one column per security
@@ -51,7 +51,7 @@ bvec <- c(bvec, rep(0, n))
 		dvec <- colMeans(returns) * i # This moves the solution up along the efficient frontier
 		sol <- solve.QP(covariance, dvec=dvec, Amat=Amat, bvec=bvec, meq=meq)
 		eff[loop,"Std.Dev"] <- sqrt(sum(sol$solution *colSums((covariance * sol$solution))))	
-		eff[loop,"Exp.Return"] <- as.numeric(sol$solution %*% colMeans(returns))
+		eff[loop,"Exp.Return"] <- as.numeric(sol$solution %*% colMeans(returns)) * 250
 		eff[loop,"sharpe"] <- eff[loop,"Exp.Return"] / eff[loop,"Std.Dev"]
 		eff[loop,1:n] <- sol$solution
 		loop <- loop+1
@@ -74,7 +74,7 @@ ggplot(eff, aes(x=Std.Dev, y=Exp.Return)) + geom_point(alpha=.1, color=ealdark) 
  annotate(geom="text", x=eff.optimal.point$Std.Dev, y=eff.optimal.point$Exp.Return,
  label=paste("Risk: ", round(eff.optimal.point$Std.Dev*100, digits=3),"\nReturn: ",
  round(eff.optimal.point$Exp.Return*100, digits=4),"%\nSharpe: ",
- round(eff.optimal.point$sharpe*100, digits=2), "%", sep=""), hjust=0, vjust=1.2) +
+ round(eff.optimal.point$sharpe, digits=2), sep=""), hjust=0, vjust=1.2) +
  ggtitle("Efficient Frontier\nand Optimal Portfolio") + labs(x="Risk (standard deviation of portfolio variance)", y="Return") +
  theme(panel.background=element_rect(fill=eallighttan), text=element_text(color=ealdark),
  plot.title=element_text(size=24, color=ealred))
