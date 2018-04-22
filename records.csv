@@ -190,13 +190,3 @@
  0.01454233 0.01361469 0.00434008 0.03383922 0.00890654 0.00083954
  0.03899522 0.03790549 0.01159612 0.02820404 0.03018779 0.04207441
  0.01436595 0.02332635]",0.126267383457965,0.126594424005817,0.648081403044076,0.194832597980561,1524415226.13065,"min_variance",3310,828
-"5",50,"['Data/Stocks/bll.us', 'Data/Stocks/tmo.us', 'Data/Stocks/ceco.us', 'Data/Stocks/emr.us', 'Data/Stocks/mchp.us', 'Data/Stocks/ibm.us', 'Data/Stocks/cnp.us', 'Data/Stocks/sna.us', 'Data/Stocks/has.us', 'Data/Stocks/lb.us', 'Data/Stocks/cof.us', 'Data/Stocks/lnc.us', 'Data/Stocks/ko.us', 'Data/Stocks/clx.us', 'Data/Stocks/x.us', 'Data/Stocks/apc.us', 'Data/Stocks/intc.us', 'Data/Stocks/iff.us', 'Data/Stocks/dov.us', 'Data/Stocks/xlnx.us', 'Data/Stocks/gps.us', 'Data/Stocks/wen.us', 'Data/Stocks/brk-b.us', 'Data/Stocks/adm.us', 'Data/Stocks/xl.us', 'Data/Stocks/t.us', 'Data/Stocks/rf.us', 'Data/Stocks/wmt.us', 'Data/Stocks/rtn.us', 'Data/Stocks/mat.us', 'Data/Stocks/ebay.us', 'Data/Stocks/leg.us', 'Data/Stocks/ctxs.us', 'Data/Stocks/xray.us', 'Data/Stocks/eqr.us', 'Data/Stocks/luv.us', 'Data/Stocks/mcd.us', 'Data/Stocks/dgx.us', 'Data/Stocks/bby.us', 'Data/Stocks/twx.us', 'Data/Stocks/nke.us', 'Data/Stocks/bc.us', 'Data/Stocks/see.us', 'Data/Stocks/cag.us', 'Data/Stocks/adsk.us', 'Data/Stocks/msa.us', 'Data/Stocks/phm.us', 'Data/Stocks/msft.us', 'Data/Stocks/ca.us', 'Data/Stocks/mro.us']","[0.04232813 0.02717436 0.02909432 0.0189497  0.04657018 0.0261948
- 0.00600755 0.03963038 0.00959906 0.0141492  0.01269783 0.00743701
- 0.03942644 0.01382745 0.00998107 0.02790259 0.00354548 0.02479469
- 0.00933429 0.01041916 0.00995628 0.01427855 0.02929215 0.00578043
- 0.00895385 0.00193271 0.00400218 0.01670833 0.04351056 0.00060046
- 0.01835882 0.00095772 0.01039602 0.02657414 0.00165172 0.00789986
- 0.01184476 0.03526663 0.0053312  0.04145028 0.02585248 0.02090399
- 0.03082934 0.0387842  0.04608337 0.04777326 0.02010815 0.02337617
- 0.01199406 0.02048467]",0.1459473222192,0.145523983005101,0.709460207178467,0.205716008794397,1524415226.13065,"best_sharpe",3310,828
-"11",5,"bll.us, tmo.us, ceco.us, emr.us, mchp.us","0.324033089552625, 0.186350061647673, 0.129095993649007, 0.228332270701205, 0.132188584449491",0.173094227329903,0.144698936705925,0.666738756565952,0.259613267753366,1524435002.80812,"hrp",3164,791

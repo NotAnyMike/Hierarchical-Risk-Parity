@@ -274,7 +274,7 @@ save_records <- function(returns,hrp,train,test,eff){
 	)
 	records <- rbind(records, to_add)
 
-	records[,c(1,4:11)]
+	print(records[,c(1,4:11)])
 	write.csv(records,"records.csv")
 }
 #-------------------------------------------------------------------------------
