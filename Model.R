@@ -188,27 +188,14 @@ plot_efficient_frontier <- function(eff){
 #-------------------------------------------------------------------------------
 
 # Initial config
-use_raw_data = T # whether or not to use clean files or raw files
 min_file_size = 650000 #in bytes
 DIR = "Data/Stocks/" # DO NOT change at least you have the data in another RELATIVE directory
 
-if (use_raw_data){
-	# Reading files (in case files come clean)
-	cov <- read.csv("Data/Exported/cov.csv", header=T, row.names=1)
-	corr <- read.csv("Data/Exported/corr.csv", header=T, row.names=1)
-	returns <- read.csv("Data/Exported/series.csv",head=TRUE, row.names=1)	
-}else{
-	# Cleaning files
-	list_of_files <- list.files(path = DIR)
-	final_list <- list()
-	for (name_file in list_of_files){
-		if(file.size(paste(DIR,name_file,sep="")) >= min_file_size){
-			tmp_file <- read.csv(paste(DIR,name_file,sep=""), header=T, row.names=1)
-		}
-	}
-	returns <- ""
-}
-
+# Reading files (in case files come clean)
+cov <- read.csv("Data/Exported/cov.csv", header=T, row.names=1) #covariance
+corr <- read.csv("Data/Exported/corr.csv", header=T, row.names=1) #correlation
+returns <- read.csv("Data/Exported/series.csv",head=TRUE, row.names=1)	#returns
+	
 # Running HRP
 outputs <- getHRP(cov, corr)
 heatmap(data.matrix(corr[outputs$sortIx, outputs$sortIx])) # Plot of HRP
