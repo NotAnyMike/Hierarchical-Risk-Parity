@@ -182,6 +182,104 @@ plot_efficient_frontier <- function(eff){
 
 #-------------------------------------------------------------------------------
 
+#-------------------------------------------------------------------------------
+# This function regards the reading and saving the records
+#-------------------------------------------------------------------------------
+save_records <- function(returns,hrp,train,test,eff){
+	# Reading files
+	records <- read.csv("records.csv", head=T, row.names=1)
+
+	# adding configs from hrp
+	n_assets <- ncol(returns)
+	assets <- paste(colnames(returns), collapse=", ")
+	w_str <- paste(hrp$w, collapse=", ")
+	w <- hrp$w
+	return <- sum(colMeans(train)*w)*250
+	return_oos <- sum(colMeans(test)*w)*250
+	volatility <- sum(apply(train,2,sd)*w)
+	sharpe_ratio <- return/volatility
+	timestamp <- Sys.time()
+	type <- "hrp"
+	n_samples <- split
+	n_oos <- nrow(returns)-split
+
+	to_add <- data.frame(
+		n_assets=n_assets,
+		assets=assets,
+		w = w_str,
+		return = return,
+		return_oos = return_oos,
+		volatility = volatility,
+		sharpe_ratio = sharpe_ratio,
+		timestamp = timestamp,
+		type = type,
+		n_samples = n_samples,
+		n_oos = n_oos
+	)
+	records <- rbind(records, to_add)
+
+	# adding configs from best sharpe ration markowitz portfolio
+	assets <- paste(colnames(eff)[1:(ncol(eff)-3)], collapse=", ")
+	w <- eff.min_vol.point[1,1:(ncol(eff)-3)]
+	w_str <- paste(w, collapse=", ")
+	return <- sum(colMeans(train)*w)*250
+	return_oos <- sum(colMeans(test)*w)*250
+	volatility <- sum(apply(train,2,sd)*w)
+	sharpe_ratio <- return/volatility
+	timestamp <- Sys.time()
+	type <- "best_sharpe"
+	n_samples <- split
+	n_oos <- nrow(returns)-split
+
+	to_add <- data.frame(
+		n_assets=n_assets,
+		assets=assets,
+		w = w_str,
+		return = return,
+		return_oos = return_oos,
+		volatility = volatility,
+		sharpe_ratio = sharpe_ratio,
+		timestamp = timestamp,
+		type = type,
+		n_samples = n_samples,
+		n_oos = n_oos
+	)
+	records <- rbind(records, to_add)
+
+	# adding configs from best volatitlity ration markowitz portfolio
+	assets <- paste(colnames(eff)[1:(ncol(eff)-3)], collapse=", ")
+	w <- eff.optimal.point[1,1:(ncol(eff)-3)]
+	w_str <- paste(w, collapse=", ")
+	return <- sum(colMeans(train)*w)*250
+	return_oos <- sum(colMeans(test)*w)*250
+	volatility <- sum(apply(train,2,sd)*w)
+	sharpe_ratio <- return/volatility
+	timestamp <- Sys.time()
+	type <- "min_variance"
+	n_samples <- split
+	n_oos <- nrow(returns)-split
+
+	to_add <- data.frame(
+		n_assets=n_assets,
+		assets=assets,
+		w = w_str,
+		return = return,
+		return_oos = return_oos,
+		volatility = volatility,
+		sharpe_ratio = sharpe_ratio,
+		timestamp = timestamp,
+		type = type,
+		n_samples = n_samples,
+		n_oos = n_oos
+	)
+	records <- rbind(records, to_add)
+
+	records[,c(1,4:11)]
+	write.csv(records,"records.csv")
+}
+#-------------------------------------------------------------------------------
+
+
 
 #-------------------------------------------------------------------------------
 # Running models
@@ -213,25 +311,12 @@ heatmap(data.matrix(corr[hrp$sortIx, hrp$sortIx])) # Plot of HRP
 #-------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------
-#Running Markowitz
-eff <- eff.frontier(returns=returns, short="no", max.allocation=.45, risk.premium.up=.5, risk.increment=.0005)
+# Running Markowitz
+eff <- eff.frontier(returns=returns, short="no", max.allocation=.40)
 eff.optimal.point <- eff[eff$sharpe==max(eff$sharpe),]
+eff.min_vol.point <- eff[eff$Std.Dev==min(eff$Std.Dev),]
 plot_efficient_frontier(eff) # plot of Markowitz
 #-------------------------------------------------------------------------------
 
-#-------------------------------------------------------------------------------
-# reading records and saving them
-#-------------------------------------------------------------------------------
-records <- read.csv("records.csv", head=T, row.names=1)
-n_assets <- ncol(returns)
-assets <- colnames(returns)
-w <- hrp$w
-return <- sum(colMeans(train)*w)*250
-return_oos <- sum(colMeans(test)*w)*250
-volatility <- sum(apply(train,2,sd)*2)
-sharpe_ratio <- return/volatility
-timestamp <- Sys.time()
-type <- "hrp"
-n_samples <- split
-n_oss <- nrow(returns)-split
-#-------------------------------------------------------------------------------
+# Saving models
+save_records(returns,hrp,train,test,eff)
