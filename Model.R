@@ -187,14 +187,24 @@ plot_efficient_frontier <- function(eff){
 # Running models
 #-------------------------------------------------------------------------------
 
+#-------------------------------------------------------------------------------
 # Initial config
-min_file_size = 650000 #in bytes
+train_test_splot = .8 # in %
 DIR = "Data/Stocks/" # DO NOT change at least you have the data in another RELATIVE directory
+#-------------------------------------------------------------------------------
 
 # Reading files (in case files come clean)
-cov <- read.csv("Data/Exported/cov.csv", header=T, row.names=1) #covariance
-corr <- read.csv("Data/Exported/corr.csv", header=T, row.names=1) #correlation
 returns <- read.csv("Data/Exported/series.csv",head=TRUE, row.names=1)	#returns
+
+split <- as.integer(nrow(returns)* train_test_splot)
+train <- returns[1:split,]
+test <- returns[split:nrow(returns),]
+cov <- cov(train)
+corr <- cor(train)
+
+#in case the cov and corr are bigdata
+#cov <- read.csv("Data/Exported/cov.csv", header=T, row.names=1) #covariance
+#corr <- read.csv("Data/Exported/corr.csv", header=T, row.names=1) #correlation
 	
 # Running HRP
 outputs <- getHRP(cov, corr)
@@ -205,3 +215,19 @@ eff <- eff.frontier(returns=returns, short="no", max.allocation=.45, risk.premiu
 eff.optimal.point <- eff[eff$sharpe==max(eff$sharpe),]
 plot_efficient_frontier(eff) # plot of Markowitz
 
+#-------------------------------------------------------------------------------
+# reading records and saving them
+#-------------------------------------------------------------------------------
+records <- read.csv("records.csv", head=T, row.names=1)
+n_assets <- 0
+assets <- ""
+w <- 0
+return <- 0
+return_oos <- 0
+sharpe_ratio <- 0
+volatility <- 0
+timestamp <- 0
+type <- "hrp"
+n_samples <- 0
+n_oss <- 0
+#-------------------------------------------------------------------------------
