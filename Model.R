@@ -205,29 +205,33 @@ corr <- cor(train)
 #in case the cov and corr are bigdata
 #cov <- read.csv("Data/Exported/cov.csv", header=T, row.names=1) #covariance
 #corr <- read.csv("Data/Exported/corr.csv", header=T, row.names=1) #correlation
-	
-# Running HRP
-outputs <- getHRP(cov, corr)
-heatmap(data.matrix(corr[outputs$sortIx, outputs$sortIx])) # Plot of HRP
 
+#-------------------------------------------------------------------------------
+# Running HRP
+hrp <- getHRP(cov, corr)
+heatmap(data.matrix(corr[hrp$sortIx, hrp$sortIx])) # Plot of HRP
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
 #Running Markowitz
 eff <- eff.frontier(returns=returns, short="no", max.allocation=.45, risk.premium.up=.5, risk.increment=.0005)
 eff.optimal.point <- eff[eff$sharpe==max(eff$sharpe),]
 plot_efficient_frontier(eff) # plot of Markowitz
+#-------------------------------------------------------------------------------
 
 #-------------------------------------------------------------------------------
 # reading records and saving them
 #-------------------------------------------------------------------------------
 records <- read.csv("records.csv", head=T, row.names=1)
-n_assets <- 0
-assets <- ""
-w <- 0
-return <- 0
-return_oos <- 0
-sharpe_ratio <- 0
-volatility <- 0
-timestamp <- 0
+n_assets <- ncol(returns)
+assets <- colnames(returns)
+w <- hrp$w
+return <- sum(colMeans(train)*w)*250
+return_oos <- sum(colMeans(test)*w)*250
+volatility <- sum(apply(train,2,sd)*2)
+sharpe_ratio <- return/volatility
+timestamp <- Sys.time()
 type <- "hrp"
-n_samples <- 0
-n_oss <- 0
+n_samples <- split
+n_oss <- nrow(returns)-split
 #-------------------------------------------------------------------------------
