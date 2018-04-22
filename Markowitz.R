@@ -1,4 +1,3 @@
-library(stockPortfolio)
 library(quadprog)
 library(ggplot2)
 
@@ -64,6 +63,8 @@ eff <- eff.frontier(returns=returns, short="no", max.allocation=.45, risk.premiu
 
 eff.optimal.point <- eff[eff$sharpe==max(eff$sharpe),]
  
+
+plot_efficient_frontier <- function(eff){
 # Color Scheme
 ealred  <- "#7D110C"
 ealtan  <- "#CDC4B6"
@@ -78,5 +79,7 @@ ggplot(eff, aes(x=Std.Dev, y=Exp.Return)) + geom_point(alpha=.1, color=ealdark) 
  ggtitle("Efficient Frontier\nand Optimal Portfolio") + labs(x="Risk (standard deviation of portfolio variance)", y="Return") +
  theme(panel.background=element_rect(fill=eallighttan), text=element_text(color=ealdark),
  plot.title=element_text(size=24, color=ealred))
+}
+
 
 eff.optimal.point
