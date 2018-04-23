@@ -69,6 +69,12 @@ las diferentes métricas para el modelo se pueden observar bajo el índice 7 en 
 
 Como se mencionó en la intruducción, el punto de comparación que se utilizó fueron dos modelos de markowitz, uno optmizando el Sharpe Ratio y el segundo optimizando su volatilidad (i.e. disminuyendo el riesgo), solo cabe mencionar dos puntos, el primero: para el cálculo del ratio se supuso una tasa libre de riesgo en benchmark de cero para simplificar cálculos, y el segundo punto es sobre la implementación del modelo de markowitz en python, es una versión simplificada ya que no soluciona la función cuadrática del modelo sino que en cambio utiliza un muestreo aleatorio amplio sobre el espacio para generar el espacio desde donde se elegiran los diferentes portafolios.
 
+Otros modelos de composición similar que se pueden utilizar para comparación se pueden observar en la siguientes dos gráficas
+
+![efficient frontier](img/Efficient_frontier.png "efficien  frontier")
+
+![markowitz](img/py.png "markowitz")
+
 ## Disclaimers
 
 En realación al código utilizado en los modelos de python es necesario mencionar que el modelo de markowitz está basada en el código del [este](https://github.com/PyDataBlog/Python-for-Data-Science) repositorio mientras que el código utilizado para hrp se base en el modelo original propuesto por Marcos Lopez de Prado
