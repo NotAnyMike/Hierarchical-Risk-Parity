@@ -16,7 +16,9 @@ El modelo se puede mejorar y se debería mejorar, una mejora importante sería i
 
 ## Resultados
 
-Este tipo de modelos tiene un mejor comportamiento mientras más datos se utilizan, la base de datos utilizada aquí cuenta de al rededor de 600 Mbs en datos de acciones del S&P500, claro está que depués de la limpiesa aplicada en este repositorio, muchos datos no cumplen con las características necesarias para ser utilizados en el modelo. En la siguiente tabla se muestran los ratios del modelo para diferentes configuraciones (por cuestión de estética no se muestran todas las colúmnas)
+Este tipo de modelos tiene un mejor comportamiento mientras más datos se utilizan, la base de datos utilizada aquí cuenta de al rededor de 600 Mbs en datos de acciones del S&P500, claro está que depués de la limpiesa aplicada en este repositorio, muchos datos no cumplen con las características necesarias para ser utilizados en el modelo. En la siguiente tabla se muestran los ratios del modelo para diferentes configuraciones (por cuestión de estética no se muestran todas las colúmnas). Como se mencionó, el modelo no busca optimizar los retornos, pero de forma indirecta consigue retornos generalmente que se encuentran entre los dos modelos utilizados por benchmark.
+
+![printing of the table contained in records](img/records.png "Records.csv")
 
 ## How to run it
 
