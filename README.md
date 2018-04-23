@@ -16,9 +16,20 @@ El modelo se puede mejorar y se debería mejorar, una mejora importante sería i
 
 ## Resultados
 
-Este tipo de modelos tiene un mejor comportamiento mientras más datos se utilizan, la base de datos utilizada aquí cuenta de al rededor de 600 Mbs en datos de acciones del S&P500, claro está que depués de la limpiesa aplicada en este repositorio, muchos datos no cumplen con las características necesarias para ser utilizados en el modelo. En la siguiente tabla se muestran los ratios del modelo para diferentes configuraciones (por cuestión de estética no se muestran todas las colúmnas). Como se mencionó, el modelo no busca optimizar los retornos, pero de forma indirecta consigue retornos generalmente que se encuentran entre los dos modelos utilizados por benchmark.
+El portafolio que se seleccionó para este caso está compuesto de 50 acciones, en la sección de composición de portafolio se ve la composición exacta del portafolio para los 50 activos seleccionados.
+
+Cabe mencionar que este tipo de modelos tiene un mejor comportamiento mientras más datos se utilizan, la base de datos utilizada aquí cuenta de al rededor de 600 Mbs en datos de acciones del S&P500, claro está que depués de la limpiesa aplicada en este repositorio, muchos datos no cumplen con las características necesarias para ser utilizados en el modelo. En la siguiente tabla se muestran los ratios del modelo para diferentes configuraciones (por cuestión de estética no se muestran todas las colúmnas). 
 
 ![printing of the table contained in records](img/records.png "Records.csv")
+
+Como se mencionó, el modelo no busca optimizar los retornos, pero de forma indirecta consigue retornos generalmente que se encuentran entre los dos modelos utilizados por benchmark si se mide por el sharpe ratio. En las siguientes figuras se puede observar la representación de la matriz de correlaciones como mapa de calor donde se puede también observar las aglomeraciones que genera el algoritmo, también se puede observar en la siguiente imagen la distribución gerárquica del modelo hrp sobre los 50 activos (dicho dendograma es generado en python)
+
+![hrp tree](img/hrp.png "hrp tree")
+
+![dendrogram](img/dendrogram.png "dendrograma")
+
+
+### Estructura del portafolio seleccionado
 
 ## How to run it
 
