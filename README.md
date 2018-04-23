@@ -14,7 +14,7 @@ Desde el punto de vista de las acciones utilizadas, la decisión fue tomada bás
 
 El modelo se puede mejorar y se debería mejorar, una mejora importante sería incorporar el tiempo en el modelo al corregir los pesos generados de los portafolios según la dinámica de la función de pérdida que se defina, de la misma forma que se usa en aprendizaje de máquina con el backpropagation.
 
-## Resultados
+## Resultados
 
 El portafolio que se seleccionó para este caso está compuesto de 50 acciones con un retorno de por fuera de la muestra de 18% y un retorno (dentro de la muestra) de 9%. En la sección de composición de portafolio se ve la composición exacta del portafolio para los 50 activos seleccionados.
 
