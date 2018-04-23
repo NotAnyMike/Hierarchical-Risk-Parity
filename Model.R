@@ -197,8 +197,8 @@ save_records <- function(returns,hrp,train,test,eff){
 	return <- sum(colMeans(train)*w)*250
 	return_oos <- sum(colMeans(test)*w)*250
 	volatility <- sum(apply(train,2,sd)*w)
-	sharpe_ratio <- return/volatility
-	timestamp <- Sys.time()
+	sharpe_ratio <- return_oos/volatility
+	timestamp <- ""
 	type <- "hrp"
 	n_samples <- split
 	n_oos <- nrow(returns)-split
@@ -225,8 +225,8 @@ save_records <- function(returns,hrp,train,test,eff){
 	return <- sum(colMeans(train)*w)*250
 	return_oos <- sum(colMeans(test)*w)*250
 	volatility <- sum(apply(train,2,sd)*w)
-	sharpe_ratio <- return/volatility
-	timestamp <- Sys.time()
+	sharpe_ratio <- return_oos/volatility
+	timestamp <- ""
 	type <- "best_sharpe"
 	n_samples <- split
 	n_oos <- nrow(returns)-split
@@ -253,8 +253,8 @@ save_records <- function(returns,hrp,train,test,eff){
 	return <- sum(colMeans(train)*w)*250
 	return_oos <- sum(colMeans(test)*w)*250
 	volatility <- sum(apply(train,2,sd)*w)
-	sharpe_ratio <- return/volatility
-	timestamp <- Sys.time()
+	sharpe_ratio <- return_oos/volatility
+	timestamp <- ""
 	type <- "min_variance"
 	n_samples <- split
 	n_oos <- nrow(returns)-split
@@ -275,7 +275,7 @@ save_records <- function(returns,hrp,train,test,eff){
 	records <- rbind(records, to_add)
 
 	print(records[,c(1,4:11)])
-	write.csv(records,"records.csv")
+	#write.csv(records,"records.csv")
 }
 #-------------------------------------------------------------------------------
 
@@ -320,3 +320,8 @@ plot_efficient_frontier(eff) # plot of Markowitz
 
 # Saving models
 save_records(returns,hrp,train,test,eff)
+
+# Showing weights
+hrp$w
+# Showing stocks
+colnames(returns)

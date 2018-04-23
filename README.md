@@ -65,6 +65,30 @@ las diferentes métricas para el modelo se pueden observar bajo el índice 7 en 
 
 ## How to run it
 
+### R
+
+Para correr los resultados vistos aquí solo es necesario correr todo el archivo `Model.R`. Si no cuentas con las librerías que se usan por favor seguir leyendo.
+
+Las únicas librerías que se están usando en R son `ggplot2` y `quadprog`, ambas librerías son muy comunes y no sería problema instalarlas sin problema, se recomienda instalarlas automáticamente usando el Package Installer default de R o cualquier distribución con la que estés acostumbrado, si este no es el caso los packetes se puedes descargar en los siguientes links [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html) y [quadprog](https://cran.r-project.org/web/packages/quadprog/index.html) (no se agrega el paquete porque depende de la distribución de R y del sistema operativo que estés usando, para el desarrollo de este modelo se utilizaron las versiones 2.2.1 y 1.5-5 respectivamente)
+
+### Python
+
+Python se utilizó para confirmar la solides de los algoritmos utilizados en R y se recomienda revisar el código únicamente, para ejecutarlo es necesario que el usario esté cómodo utilizando python y jyputer notebooks, para revisar el código ejecutado en python se puede revisar el documento html `HRP.html`, para ejecutar el código por favor seguir leyendo (no se utilizó python plano debido a las gráficas).
+
+Para poder correr los modelos que se utilizaron bajo el lenguaje de programación Python es necesario tener instalado los siguientes packetes (aparte de python la versión más actual de python 2.7):
+1. `jupyter`
+1. `matplotlib`
+2. `pandas`
+3. `pickle`
+4. `numpy` 
+5. `scipy`
+
+dependiendo de la distribución y configuración del sistema operativo, se puede utilizar el siguiente comando desde la terminal `pip install [nombre del paquete]` o en raros casos `pip2 install [...]` o incluso `pip2 install [...]`. Para instalar python se recomienda seguir los pasos de instalación en la pagina oficial ([link](https://www.python.org/downloads/))
+
+Una vez los paquetes se hayan instalado, se puede usar en la terminal desde la carpeta raíz de este repositorio el comando `jupyter notebook` para ejecutar la interfaz gráfica e interactiva de python.
+
+Una vez jupyter se haya lanzado, por favor selecionar el documento `HRP.ipynb`, para ejecutar el modelo se debe ejecutar todas las lineas desde `Kernel >> Restart & Run All`
+
 ## Otros modelos utilizados
 
 Como se mencionó en la intruducción, el punto de comparación que se utilizó fueron dos modelos de markowitz, uno optmizando el Sharpe Ratio y el segundo optimizando su volatilidad (i.e. disminuyendo el riesgo), solo cabe mencionar dos puntos, el primero: para el cálculo del ratio se supuso una tasa libre de riesgo en benchmark de cero para simplificar cálculos, y el segundo punto es sobre la implementación del modelo de markowitz en python, es una versión simplificada ya que no soluciona la función cuadrática del modelo sino que en cambio utiliza un muestreo aleatorio amplio sobre el espacio para generar el espacio desde donde se elegiran los diferentes portafolios.
