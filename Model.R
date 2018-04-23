@@ -227,7 +227,7 @@ save_records <- function(returns,hrp,train,test,eff){
 	volatility <- sum(apply(train,2,sd)*w)
 	sharpe_ratio <- return_oos/volatility
 	timestamp <- ""
-	type <- "best_sharpe"
+	type <- "min_variance"
 	n_samples <- split
 	n_oos <- nrow(returns)-split
 
@@ -255,7 +255,7 @@ save_records <- function(returns,hrp,train,test,eff){
 	volatility <- sum(apply(train,2,sd)*w)
 	sharpe_ratio <- return_oos/volatility
 	timestamp <- ""
-	type <- "min_variance"
+	type <- "best_sharpe"
 	n_samples <- split
 	n_oos <- nrow(returns)-split
 
