@@ -16,19 +16,52 @@ El modelo se puede mejorar y se debería mejorar, una mejora importante sería i
 
 ## Resultados
 
-El portafolio que se seleccionó para este caso está compuesto de 50 acciones, en la sección de composición de portafolio se ve la composición exacta del portafolio para los 50 activos seleccionados.
+El portafolio que se seleccionó para este caso está compuesto de 50 acciones con un retorno de por fuera de la muestra de 18% y y un retorno (dentro de la muestra) de 9%. En la sección de composición de portafolio se ve la composición exacta del portafolio para los 50 activos seleccionados.
 
-Cabe mencionar que este tipo de modelos tiene un mejor comportamiento mientras más datos se utilizan, la base de datos utilizada aquí cuenta de al rededor de 600 Mbs en datos de acciones del S&P500, claro está que depués de la limpiesa aplicada en este repositorio, muchos datos no cumplen con las características necesarias para ser utilizados en el modelo. En la siguiente tabla se muestran los ratios del modelo para diferentes configuraciones (por cuestión de estética no se muestran todas las colúmnas). 
+Como se mencionó, el modelo no busca optimizar los retornos, pero de forma indirecta consigue retornos generalmente que se encuentran entre los dos modelos utilizados por benchmark si se mide por el sharpe ratio. En las siguientes figuras se puede observar la representación de la matriz de correlaciones como mapa de calor donde se puede también observar las aglomeraciones que genera el algoritmo, también se puede observar en los bordes de la imagen la distribución gerárquica del modelo hrp sobre los 50 activos.
+
+En la siguiente tabla se muestran los ratios del modelo para diferentes configuraciones (por cuestión de estética no se muestran todas las colúmnas). 
 
 ![printing of the table contained in records](img/records.png "Records.csv")
 
-Como se mencionó, el modelo no busca optimizar los retornos, pero de forma indirecta consigue retornos generalmente que se encuentran entre los dos modelos utilizados por benchmark si se mide por el sharpe ratio. En las siguientes figuras se puede observar la representación de la matriz de correlaciones como mapa de calor donde se puede también observar las aglomeraciones que genera el algoritmo, también se puede observar en los bordes de la imagen la distribución gerárquica del modelo hrp sobre los 50 activos.
+Cabe mencionar que este tipo de modelos tiene un mejor comportamiento mientras más datos se utilizan, la base de datos utilizada aquí cuenta de al rededor de 600 Mbs en datos de acciones del S&P500, claro está que depués de la limpiesa aplicada en este repositorio, muchos datos no cumplen con las características necesarias para ser utilizados en el modelo. 
 
 ![hrp tree](img/hrp.png "hrp tree")
 
 Una característica importante del modelo que vale la pena resaltar es que, aunque no intenta optimizar los retornos, el retorno por fuera de la muestra (`return_oos` en `records`) suele se competitivo con los modelos de comparación, en muchos casos este es superior al portafolio cuyo único  objetivo es optimizar la varianza y al mismo tiempo se mantiene en los niveles similares de volatilidad (riesgo). Si se compara por el sharpe ratio (y con el respectivmo modelo que optimiza este ratio) sus resultados (por fuera de la muestra) son muy optimistas, siempre ocurre que el modelo hrp supera el sharpe ratio (oos - _out of sample_) de su modelo de compración o supera el sharpe ratio del modelo mínimo en el riesgo (que por cuestiones de dinámica de los activos supera ambos modelos)
 
 ### Estructura del portafolio seleccionado
+
+Los pesos para las 50 acciones, en el siguiente orden:
+
+```
+ [1] "bll.us"   "tmo.us"   "ceco.us"  "emr.us"   "mchp.us"  "ibm.us"
+ [7] "cnp.us"   "sna.us"   "has.us"   "lb.us"    "cof.us"   "lnc.us"
+[13] "ko.us"    "clx.us"   "x.us"     "apc.us"   "intc.us"  "iff.us"
+[19] "dov.us"   "xlnx.us"  "gps.us"   "wen.us"   "brk.b.us" "adm.us"
+[25] "xl.us"    "t.us"     "rf.us"    "wmt.us"   "rtn.us"   "mat.us"
+[31] "ebay.us"  "leg.us"   "ctxs.us"  "xray.us"  "eqr.us"   "luv.us"
+[37] "mcd.us"   "dgx.us"   "bby.us"   "twx.us"   "nke.us"   "bc.us"
+[43] "see.us"   "cag.us"   "adsk.us"  "msa.us"   "phm.us"   "msft.us"
+[49] "ca.us"    "mro.us"
+```
+
+son respectivamente
+
+```
+ [1] 0.018022103 0.019710212 0.011754940 0.014121573 0.007604949
+ [6] 0.026876473 0.020562459 0.013164212 0.020032061 0.008757810
+[11] 0.004498418 0.003638323 0.054550348 0.066217343 0.004817607
+[16] 0.008482951 0.015596686 0.024876230 0.021315107 0.006557886
+[21] 0.016708810 0.012724280 0.041214119 0.019988109 0.004318081
+[26] 0.034007180 0.004225616 0.050045325 0.044322342 0.019075856
+[31] 0.011446963 0.020154215 0.007983988 0.023815873 0.012962359
+[36] 0.016945941 0.029598422 0.039720647 0.011225476 0.020058699
+[41] 0.024433902 0.005258499 0.016203016 0.064112061 0.015354838
+[46] 0.018046830 0.005014888 0.018880822 0.011067199 0.009927953
+```
+
+las diferentes métricas para el modelo se pueden observar bajo el índice 7 en la table correspondiente al archivo `records.csv`.
 
 ## How to run it
 
@@ -42,3 +75,4 @@ En realación al código utilizado en los modelos de python es necesario mencion
 
 Por el lado de los modelos utilizados en R, estos están basados en el algoritmo origina del siguiente [link](http://economistatlarge.com/portfolio-theory/r-optimized-portfolio) y con respecto al algoritmo utilizado para el modelo de markowitz y graficar la frontera eficiente, el código se basó del algorimo original de [aquí](https://residualmetrics.com/index.php/featured-home/10-finance-markets/39-testing-the-performance-of-hierarchical-risk-parity-for-portfolio-optimisation-using-jse-shares) el cual también está basado directamente en el algorimo original propuesto por Marco Lopez de Prado.
 
+Por último es necesario revisar la implementación del ratio de volatilidad en python para corregir algunas diferencias que se han presentado.
